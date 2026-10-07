@@ -3,17 +3,16 @@ class Solution:
         count = [0] * 26
         for ch in s:
             count[ord(ch) - ord('a')] += 1
-        # the top of t is <= the smallest letter still left in s.
         t = []
         p = []
         for ch in s:
             t.append(ch)
             count[ord(ch) - ord('a')] -= 1
-            smallest_val = "{"
+            smallest_char = "{"
             for i in range(26):
                 if count[i] > 0:
-                    smallest_val = chr(ord('a') + i)
+                    smallest_char = chr(ord('a') + i)
                     break
-            while t and t[-1] <= smallest_val:
+            while t and t[-1] <= smallest_char:
                 p.append(t.pop())
-        return "".join(p)
+        return "".join(p)            
