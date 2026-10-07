@@ -1,17 +1,12 @@
 class Solution:
     def findErrorNums(self, nums: list[int]) -> list[int]:
-        # find the dup 
-        # find the missing number
-        n = len(nums)
-        res = [False] * (n + 1)
+        num = Counter(nums)
+        dup =0
+        for k in num:
+            if num[k] > 1:
+                    dup = k
+        for i in range(1,len(nums) + 1):
+            if i not in num:
+                return[dup,i]
 
-        dup = -1
-        for num in nums:
-            if res[num] == True:
-                dup = num
-            res[num] = True
-        
-        for i in range(1,len(res)):
-            if not res[i]:
-                return [dup,i]
 
