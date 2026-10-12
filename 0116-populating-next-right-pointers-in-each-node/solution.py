@@ -15,15 +15,16 @@ class Solution:
         q = deque()
         q.append(root)
         while q:
-            prev = None
+            prev = None # keep track of the previous node in a row
             for _ in range(len(q)):
                 curr = q.popleft()
                 if prev:
                     prev.next = curr
+                prev = curr
                 if curr.left:
                     q.append(curr.left)
                 if curr.right:
                     q.append(curr.right)
-                prev = curr
-            prev.next = None
         return root
+                
+
