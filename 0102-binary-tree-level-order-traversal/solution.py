@@ -5,7 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+    def levelOrder(self, root: TreeNode | None) -> list[list[int]]:
         if not root:
             return []
         res = []
@@ -13,12 +13,12 @@ class Solution:
         q.append(root)
         while q:
             temp = []
-            for _ in range (len(q)):
+            for _ in range(len(q)):
                 curr = q.popleft()
                 temp.append(curr.val)
                 if curr.left:
                     q.append(curr.left)
                 if curr.right:
                     q.append(curr.right)
-            res.append(temp)
-        return res
+            res.append(temp[:])
+        return res 
