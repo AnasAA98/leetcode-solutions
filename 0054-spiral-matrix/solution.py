@@ -1,34 +1,26 @@
 class Solution:
-    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
-        row,col = len(matrix),len(matrix[0])
-        #intialize the boundaries
-        top_row = 0
-        bottom_row = row -1
-        left_col = 0
-        right_col =  col -1
-        result = []
-        while left_col <= right_col and top_row <= bottom_row:
-            # clear out top row
-            for d in range(left_col,right_col+1):
-                result.append(matrix[top_row][d])
-            top_row+=1
-            # clear out right col
-            for d in range(top_row,bottom_row+1):
-                result.append(matrix[d][right_col])
+    def spiralOrder(self, matrix: list[list[int]]) -> list[int]:
+        n = len(matrix)
+        m = len(matrix[0])
+        top_row, bottom_row, left_col, right_col = 0, n - 1, 0, m - 1
+        res = []
+        while len(res) != m * n:
+            # check first row
+            for c in range(left_col, right_col + 1):
+                res.append(matrix[top_row][c])
+            top_row += 1
+            
+            for r in range(top_row, bottom_row + 1):
+                res.append(matrix[r][right_col])
             right_col -=1
-            
-            # clear out bottom row
+
             if top_row <= bottom_row:
-                for d in range(right_col,left_col -1, -1):
-                    result.append(matrix[bottom_row][d])
-                bottom_row -=1
-            
-            # clear out left col
+                for c in range(right_col, left_col -1, -1):
+                    res.append(matrix[bottom_row][c])
+                bottom_row -= 1
             if left_col <= right_col:
-                for d in range(bottom_row,top_row -1,-1):
-                    result.append(matrix[d][left_col])
+                for r in range(bottom_row, top_row - 1, -1):
+                    res.append(matrix[r][left_col])
                 left_col +=1
-        return result
-                    
-            
-        
+        return res 
+
