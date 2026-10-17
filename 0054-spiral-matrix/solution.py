@@ -1,26 +1,25 @@
 class Solution:
     def spiralOrder(self, matrix: list[list[int]]) -> list[int]:
-        n = len(matrix)
-        m = len(matrix[0])
-        top_row, bottom_row, left_col, right_col = 0, n - 1, 0, m - 1
+        m, n = len(matrix), len(matrix[0])
+        top, bottom, left, right = 0, m - 1, 0, n - 1
         res = []
         while len(res) != m * n:
-            # check first row
-            for c in range(left_col, right_col + 1):
-                res.append(matrix[top_row][c])
-            top_row += 1
-            
-            for r in range(top_row, bottom_row + 1):
-                res.append(matrix[r][right_col])
-            right_col -=1
-
-            if top_row <= bottom_row:
-                for c in range(right_col, left_col -1, -1):
-                    res.append(matrix[bottom_row][c])
-                bottom_row -= 1
-            if left_col <= right_col:
-                for r in range(bottom_row, top_row - 1, -1):
-                    res.append(matrix[r][left_col])
-                left_col +=1
-        return res 
+            # top row
+            for c in range(left, right + 1):
+                res.append(matrix[top][c])
+            top +=1
+            # right col
+            for r in range(top,bottom + 1):
+                res.append(matrix[r][right])
+            right -= 1
+            # bottom row
+            if top <= bottom:
+                for c in range(right, left - 1, -1):
+                    res.append(matrix[bottom][c])
+                bottom -= 1
+            if left <= right:
+                for r in range(bottom, top - 1, -1):
+                    res.append(matrix[r][left])
+                left += 1
+        return res
 
