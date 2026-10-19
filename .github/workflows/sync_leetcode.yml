@@ -3,13 +3,15 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 8 * * *"
+permissions:
+  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: joshcai/leetcode-sync@v1.7
         with:
-          github-token: ${{ secrets.GH_PAT }}
+          github-token: ${{ github.token }}
           leetcode-csrf-token: ${{ secrets.LEETCODE_CSRF_TOKEN }}
           leetcode-session: ${{ secrets.LEETCODE_SESSION }}
           commit-header: "[LeetCode Sync]"
