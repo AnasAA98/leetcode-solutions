@@ -7,12 +7,12 @@ class Solution:
             while l < r:
                 if s[l] != s[r]:
                     return False
-                l+=1
-                r-=1
+                l += 1
+                r -= 1
             return True
         while left < right:
             if s[left] != s[right]:
-                return check(left,right-1) or check(left+1,right)
-            left+=1
-            right-=1
-        return True
+                return check(left + 1, right) or check(left, right - 1)
+            right -= 1
+            left += 1
+        return True        
