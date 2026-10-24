@@ -1,20 +1,20 @@
 class Solution:
     def minRemoveToMakeValid(self, s: str) -> str:
-        skip = set() # set of indices to remove
-        stack = [] # keep track of valid parenthese 
-        for i,ch in enumerate(s):
-            if ch == "(":
+        inva = set() # will store indices to remove
+        stack = []
+        for i in range(len(s)):
+            if s[i] == "(":
                 stack.append(i)
-            if ch == ')':
+                inva.add(i)
+            elif s[i] == ')':
                 if stack:
-                    stack.pop()
+                    curr = stack.pop()
+                    inva.remove(curr)
                 else:
-                    skip.add(i)
-        for index in stack:
-            skip.add(index)
+                    inva.add(i)
         res = []
-        for i,ch in enumerate(s):
-            if i in skip:
+        for i, ch in enumerate(s):
+            if i in inva:
                 continue
             else:
                 res.append(ch)
