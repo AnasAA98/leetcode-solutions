@@ -1,15 +1,14 @@
 class Solution:
     def isValid(self, s: str) -> bool:
-        mapping ={")":"(", "]":"[","}":"{"}
+        brc = {"(":")", "{":"}","[":"]"}
         stack = []
         for ch in s:
-            if ch in mapping.values():
+            if ch in brc:
                 stack.append(ch)
             else:
                 if not stack:
                     return False
-                elif stack[-1]!= mapping[ch]:
+                elif brc[stack[-1]] != ch:
                     return False
-                else:
-                    stack.pop()
+                stack.pop()
         return not stack
